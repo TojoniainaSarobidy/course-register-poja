@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import lombok.*;
+import org.hibernate.annotations.UuidGenerator;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +16,7 @@ import lombok.*;
 @Entity
 @Builder
 public class JCourse {
-  @Id private UUID id;
+  @GeneratedValue @UuidGenerator @Id private UUID id;
   private String title;
   private Instant startDate;
   private Instant endDate;
