@@ -21,10 +21,6 @@ public class JCourse {
   private Instant startDate;
   private Instant endDate;
 
-  @ManyToMany
-  @JoinTable(
-      name = "register",
-      joinColumns = @JoinColumn(name = "id_course"),
-      inverseJoinColumns = @JoinColumn(name = "id_user"))
-  private List<JUser> users;
+  @OneToMany(mappedBy = "course")
+  private List<JRegister> registers;
 }

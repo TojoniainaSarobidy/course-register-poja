@@ -1,7 +1,6 @@
 package course.register.demo.repository.model;
 
 import jakarta.persistence.*;
-import java.util.List;
 import java.util.UUID;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
@@ -20,7 +19,4 @@ public class JUser {
   private String firstName;
   private String lastName;
   private String email;
-
-  @ManyToMany(mappedBy = "users")
-  private List<JCourse> courses;
 }

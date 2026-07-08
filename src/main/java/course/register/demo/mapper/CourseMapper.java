@@ -21,7 +21,6 @@ public class CourseMapper {
         .title(jCourse.getTitle())
         .startDate(jCourse.getStartDate())
         .endDate(jCourse.getEndDate())
-        .users(userMapper.toModel(jCourse.getUsers()))
         .build();
   }
 
@@ -35,7 +34,6 @@ public class CourseMapper {
         .title(course.title())
         .startDate(course.startDate())
         .endDate(course.endDate())
-        .users(userMapper.toEntity(course.users()))
         .build();
   }
 }
