@@ -3,15 +3,22 @@ package course.register.demo.mapper;
 import course.register.demo.model.Course;
 import course.register.demo.repository.model.JCourse;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.Getter;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-@AllArgsConstructor
 @Component
+@Getter
 public class CourseMapper {
   private final UserMapper userMapper;
+  private final RegisterMapper registerMapper;
 
-  public List<Course> courses(List<JCourse> jCourses) {
+  public CourseMapper(UserMapper userMapper, @Lazy RegisterMapper registerMapper) {
+    this.userMapper = userMapper;
+    this.registerMapper = registerMapper;
+  }
+
+  public List<Course> toModel(List<JCourse> jCourses) {
     return jCourses.stream().map(this::toModel).toList();
   }
 
@@ -21,7 +28,20 @@ public class CourseMapper {
         .title(jCourse.getTitle())
         .startDate(jCourse.getStartDate())
         .endDate(jCourse.getEndDate())
-        .users(userMapper.toModel(jCourse.getUsers()))
+        .build();
+  }
+
+  public List<Course> toModelWithRegister(List<JCourse> jCourses) {
+    return jCourses.stream().map(this::toModelWithRegister).toList();
+  }
+
+  public Course toModelWithRegister(JCourse jCourse) {
+    return Course.builder()
+        .id(jCourse.getId())
+        .title(jCourse.getTitle())
+        .startDate(jCourse.getStartDate())
+        .endDate(jCourse.getEndDate())
+        .registers(registerMapper.toModelWithoutCourse(jCourse.getJRegisters()))
         .build();
   }
 
@@ -35,7 +55,6 @@ public class CourseMapper {
         .title(course.title())
         .startDate(course.startDate())
         .endDate(course.endDate())
-        .users(userMapper.toEntity(course.users()))
         .build();
   }
 }

@@ -1,7 +1,6 @@
 package course.register.demo.repository.model;
 
 import jakarta.persistence.*;
-import java.util.List;
 import java.util.UUID;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
@@ -12,7 +11,7 @@ import org.hibernate.annotations.UuidGenerator;
 @Setter
 @EqualsAndHashCode
 @ToString
-@Table(name = "user_course")
+@Table(name = "user_register")
 @Entity
 @Builder
 public class JUser {
@@ -20,7 +19,4 @@ public class JUser {
   private String firstName;
   private String lastName;
   private String email;
-
-  @ManyToMany(mappedBy = "users")
-  private List<JCourse> courses;
 }
