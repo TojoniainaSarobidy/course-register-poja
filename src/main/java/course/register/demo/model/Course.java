@@ -6,4 +6,5 @@ import java.util.UUID;
 import lombok.Builder;
 
 @Builder
-public record Course(UUID id, String title, Instant startDate, Instant endDate, List<User> users) {}
+public record Course(
+    UUID id, String title, Instant startDate, Instant endDate, List<Register> registers) {}

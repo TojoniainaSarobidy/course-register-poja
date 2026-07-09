@@ -12,7 +12,7 @@ import org.hibernate.annotations.UuidGenerator;
 @Getter
 @Setter
 @EqualsAndHashCode
-@Table(name = "course")
+@Table(name = "course_register")
 @Entity
 @Builder
 public class JCourse {
@@ -21,10 +21,6 @@ public class JCourse {
   private Instant startDate;
   private Instant endDate;
 
-  @ManyToMany
-  @JoinTable(
-      name = "register",
-      joinColumns = @JoinColumn(name = "id_course"),
-      inverseJoinColumns = @JoinColumn(name = "id_user"))
-  private List<JUser> users;
+  @OneToMany(mappedBy = "jCourse")
+  private List<JRegister> jRegisters;
 }
